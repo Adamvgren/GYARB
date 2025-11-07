@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1gfoknn2nbsq"]
+
+[ext_resource type="Texture2D" uid="uid://d14auf8ef1x2h" path="res://free-pixel-art-tiny-hero-sprites/3 Dude_Monster/Dude_Monster.png" id="1_f50pn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ij6vw"]
+radius = 3.0
+height = 14.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(0.57, 0.57)
+texture = ExtResource("1_f50pn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ij6vw")
