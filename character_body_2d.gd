@@ -1,13 +1,16 @@
 extends CharacterBody2D
 
-@onready var sprite = $AnimatedSprite2D
-@onready var MAX_SPEED = 300
-@onready var GRAVITY = 1000
-@onready var ACC = 1500
-@export var JUMP = -500
+@onready var anim = $AnimatedSprite2D
+@onready var MAX_SPEED = 100
+@onready var GRAVITY = 1250
+@onready var ACC = 1250
+@export var JUMP_VELOCITY = -170
+
 
 enum{IDLE, WALK, AIR, DEAD}
 var state = IDLE
+var want_to_jump: bool = false
+var jump_buffer: float = 0.0
 
 
 func _movement(delta: float, input_x: float) -> void:
@@ -21,9 +24,9 @@ func _movement(delta: float, input_x: float) -> void:
 
 func _update_direction(input_x: float) -> void:
 	if input_x > 0:
-		sprite.flip_h = false
+		anim.flip_h = false
 	elif input_x < 0:
-		sprite.flip_h = true
+		anim.flip_h = true
 
 
 ####STATE MACHINE#########
@@ -37,8 +40,11 @@ func _physics_process(delta: float) -> void:
 	_movement(delta, input_x)
 
 	# Hoppa
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): 
+		velocity.y = JUMP_VELOCITY
+
+	
+
 
 	move_and_slide()
 	
@@ -55,25 +61,50 @@ func _physics_process(delta: float) -> void:
 	
 func _IDLE_STATE(input_x, delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP
-		state = AIR
+		_enter_air_state(true)
+
 	if input_x != 0:
-		state = WALK
+		_enter_walk_state()
+
 	if not is_on_floor():
-		state = AIR
+		_enter_air_state(false)
+
 
 func _WALK_STATE(input_x, delta):
 	if input_x == 0:
-		state = IDLE
+		_enter_idle_state()
+
 	if not is_on_floor():
-		state = AIR
+		_enter_air_state(false)
+
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP
-		state = AIR
+		_enter_air_state(true)
+
+
 
 func _AIR_STATE(input_x, delta):
 	if is_on_floor():
 		if abs(velocity.x) < 5:
-			state = IDLE
+			_enter_idle_state()
 		else:
-			state = WALK
+			_enter_walk_state()
+
+
+
+#######ENTER_STATES###########
+func _enter_idle_state():
+	state = IDLE
+	anim.play("IDLE")
+
+func _enter_walk_state():
+	state = WALK
+	anim.play("WALK")
+
+func _enter_air_state(jumping: bool):
+	state = AIR
+	anim.play("Air")
+
+	if jumping:
+		velocity.y = JUMP_VELOCITY
+
+	
