@@ -123,7 +123,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"IDLE",
-"speed": 7.5
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -146,7 +146,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"WALK",
-"speed": 7.5
+"speed": 8.5
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ij6vw"]
@@ -159,8 +159,8 @@ script = ExtResource("1_ij6vw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_qp52p")
-animation = &"AIR"
-frame_progress = 0.717129
+animation = &"WALK"
+frame_progress = 0.861109
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ij6vw")

@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://dbag31ryu88w4"]
+[gd_scene load_steps=11 format=4 uid="uid://dbag31ryu88w4"]
 
-[ext_resource type="Texture2D" uid="uid://bm0eieirvlfv3" path="res://Nature Platformer Tileset [16x16][FREE] - RottingPixels/nature-paltformer-tileset-16x16.png" id="1_c7s6e"]
-[ext_resource type="Texture2D" uid="uid://7iwluth3pe0s" path="res://Tiles/Assets/Assets.png" id="2_wijl4"]
-[ext_resource type="PackedScene" uid="uid://d1gfoknn2nbsq" path="res://character_body_2d.tscn" id="3_p5pve"]
+[ext_resource type="Texture2D" uid="uid://bm0eieirvlfv3" path="res://Nature Platformer Tileset [16x16][FREE] - RottingPixels/nature-paltformer-tileset-16x16.png" id="1_myvm1"]
+[ext_resource type="Texture2D" uid="uid://7iwluth3pe0s" path="res://Tiles/Assets/Assets.png" id="2_q0mm3"]
+[ext_resource type="PackedScene" uid="uid://d1gfoknn2nbsq" path="res://Scenes/character_body_2d.tscn" id="3_np2xp"]
+[ext_resource type="PackedScene" uid="uid://b6kcltbww3pdh" path="res://Scenes/Enemy.tscn" id="4_w7jjh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c7s6e"]
-texture = ExtResource("1_c7s6e")
+texture = ExtResource("1_myvm1")
 4:10/0 = 0
 4:10/0/terrain_set = 0
 3:10/0 = 0
@@ -38,7 +39,7 @@ terrain_set_0/terrain_0/color = Color(0, 0.451992, 0.775053, 1)
 sources/0 = SubResource("TileSetAtlasSource_c7s6e")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wijl4"]
-texture = ExtResource("2_wijl4")
+texture = ExtResource("2_q0mm3")
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 0
@@ -238,7 +239,7 @@ terrain_set_0/terrain_0/color = Color(0.434912, 1, 0.499345, 1)
 sources/0 = SubResource("TileSetAtlasSource_wijl4")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
-texture = ExtResource("2_wijl4")
+texture = ExtResource("2_q0mm3")
 6:2/0 = 0
 6:2/0/terrain_set = 0
 6:2/0/terrain = 0
@@ -354,5 +355,8 @@ tile_set = SubResource("TileSet_e0an3")
 [node name="TileMapLayer" type="TileMapLayer" parent="Tilemaps"]
 tile_set = SubResource("TileSet_urblq")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_p5pve")]
+[node name="Player" parent="." instance=ExtResource("3_np2xp")]
 position = Vector2(19, 260)
+
+[node name="Enemy" parent="." instance=ExtResource("4_w7jjh")]
+position = Vector2(339, 321)
