@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var MAX_SPEED = 100
 @onready var GRAVITY = 1250
 @onready var ACC = 1250
-@export var JUMP_VELOCITY = -170
+@export var JUMP_VELOCITY = -3
 
 
 enum{IDLE, WALK, AIR, DEAD}
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 func _IDLE_STATE(input_x, delta):
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		_enter_air_state(true)
 
 	if input_x != 0:
@@ -102,7 +102,7 @@ func _enter_walk_state():
 
 func _enter_air_state(jumping: bool):
 	state = AIR
-	anim.play("Air")
+	anim.play("AIR")
 
 	if jumping:
 		velocity.y = JUMP_VELOCITY
