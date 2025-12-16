@@ -8,24 +8,28 @@ extends CharacterBody2D
 var SPEED: float = 70
 var GRAVITY: float = 1200
 
-enum { IDLE, PATROL }
-var state = PATROL
+enum { IDLE, PATROL,SPAWN }
+var state = SPAWN
 var can_turn: bool = true
 
 var direction = -1   
+
+func _ready() -> void:
+	anim.animation_finished.connect(_on_animation_finished)
+	if anim.sprite_frames.has_animation("SPAWN"):
+		anim.sprite_frames.set_animation_loop("SPAWN", false)
 
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
 
 	match state:
+		SPAWN:
+			_spawn_state()
 		IDLE:
 			_idle_state()
 		PATROL:
 			_patrol_state()
-			"
-		DEAD:
-			_dead_state()
-		"
+			
 
 	move_and_slide()
 
@@ -38,12 +42,10 @@ func _patrol_state():
 	velocity.x = SPEED * direction
 	anim.flip_h = direction < 0
 	
-	if can_turn:
-		if direction == -1 and not ray_left.is_colliding():
-			_turn_around()
-
-		if direction == 1 and not ray_right.is_colliding():
-			_turn_around()
+func _spawn_state():
+	velocity.x = 0
+	anim.play("SPAWN")
+	
 
 func _turn_around():
 	direction *= -1
@@ -60,7 +62,12 @@ func _on_player_detect_area_body_entered(body: Node2D) -> void:
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		var direction_to_player = global_position.direction_to(body.global_position)
-	
+	if body.has_method("enter_dead_state"):
+		var dir = global_position.direction_to(body.global_position)
+		body.enter_dead_state(dir)
+		
+func _on_animation_finished():
+	if state == SPAWN and anim.animation == "SPAWN":
+		state = PATROL
+
 	
