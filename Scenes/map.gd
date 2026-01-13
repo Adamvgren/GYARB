@@ -5,12 +5,12 @@ const PLAYER_SCENE = preload("res://Scenes/character_body_2d.tscn")
 
 @onready var respawn_point: Node2D = $PlayerSpawnPos
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	_spawn_player()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta: float) -> void:
 	pass
 

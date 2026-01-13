@@ -38,9 +38,17 @@ func _idle_state():
 	velocity.x = 0
 
 func _patrol_state():
-	anim.play("WALK")
+	if anim.animation != "WALK":
+		anim.play("WALK")
+
 	velocity.x = SPEED * direction
 	anim.flip_h = direction < 0
+
+	if can_turn:
+		if direction == -1 and not ray_left.is_colliding():
+			_turn_around()
+		elif direction == 1 and not ray_right.is_colliding():
+			_turn_around()
 	
 func _spawn_state():
 	velocity.x = 0
