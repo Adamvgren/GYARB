@@ -1,32 +1,82 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbchcj8wvliui"]
+[gd_scene load_steps=15 format=3 uid="uid://dbchcj8wvliui"]
 
 [ext_resource type="Texture2D" uid="uid://byv8aqmcxmd3t" path="res://Trap and Weapon/FallingPlatfrom.png" id="1_j250o"]
+[ext_resource type="Script" uid="uid://b1viiq4et2vkl" path="res://Scenes/fallingplatformarea2D.gd" id="2_a1oqy"]
 
 [sub_resource type="GDScript" id="GDScript_j250o"]
-script/source = "extends AnimatableBody2D
-
+script/source = "extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
+@export var speed: float = 60.0
+@export var move_distance: float = 200.0
+@export var direction: Vector2 = Vector2.UP  
+
+var start_position: Vector2
+var moving_forward = true
+
+func _ready():
+	start_position = global_position
+	direction = direction.normalized()
+	anim.play(\"MOVE\")  
+
+func _physics_process(delta):
+	var target_offset = direction * move_distance
+	var target_pos = start_position + (target_offset if moving_forward else Vector2.ZERO)
+
+	
+	global_position = global_position.move_toward(target_pos, speed * delta)
+
+	
+	if global_position.distance_to(target_pos) < 1.0:
+		moving_forward = !moving_forward
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\"\"\"
+extends AnimatableBody2D
+
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var speed: float = 60
 @export var travel_distance: float = 200
 
-var start: float
-var direction = -1
+var top_y: float
+var bottom_y: float
+var direction := -1 
 
 func _ready():
-	start = position.y
+	bottom_y = global_position.y
+	top_y = bottom_y - travel_distance
 	anim.play(\"MOVE\")
 
-func _physics_process(delta):
-	position.y = speed * direction * delta
+func _process(delta):
+	global_position.y += speed * direction * delta
 
-	
-	if position.y <= start - travel_distance:
+	if global_position.y <= top_y:
+		global_position.y = top_y
 		direction = 1
-	elif position.y >= start:
+	elif global_position.y >= bottom_y:
+		global_position.y = bottom_y
 		direction = -1
+\"\"\"
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a1oqy"]
@@ -99,19 +149,21 @@ size = Vector2(22, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1oqy"]
 size = Vector2(25, 3)
 
-[node name="CharacterBody2D" type="AnimatableBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 4
 script = SubResource("GDScript_j250o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g10aj")
 animation = &"MOVE"
-frame_progress = 0.707392
+frame_progress = 0.559979
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_gm081")
 
 [node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("2_a1oqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.5, 0.5)

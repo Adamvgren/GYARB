@@ -256,7 +256,7 @@ tile_set = SubResource("TileSet_urblq")
 position = Vector2(587, 225)
 
 [node name="PlayerSpawnPos" type="Marker2D" parent="."]
-position = Vector2(19, 260)
+position = Vector2(25, 301)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(402, 225)
@@ -264,5 +264,8 @@ position = Vector2(402, 225)
 [node name="SpikeBall" parent="." instance=ExtResource("5_q0mm3")]
 position = Vector2(255, 77)
 
-[node name="Moovingplatform" parent="." instance=ExtResource("6_np2xp")]
-position = Vector2(232, 457)
+[node name="Fallingplatform" parent="." instance=ExtResource("6_np2xp")]
+position = Vector2(261, 458)
+
+[node name="Fallingplatform2" parent="." instance=ExtResource("6_np2xp")]
+position = Vector2(200, 421)
