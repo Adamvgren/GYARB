@@ -5,7 +5,7 @@ func resume():
 	get_tree().paused = false
 	$AnimationPlayer.play_backwards("Blur")
 func paus():
-	get_tree().paused = true
+	get_tree().paused = false
 	$AnimationPlayer.play("Blur")
 
 func testESC():
@@ -22,7 +22,7 @@ func _on_resume_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://control.tscn")
 
 
 func _process(delta):
