@@ -1,13 +1,15 @@
 extends Node2D
 
-const PLAYER_SCENE = preload("res://Scenes/character_body_2d.tscn")
+const PLAYER_SCENE = preload("res://Scenes/Player.tscn")
 
 
 @onready var respawn_point: Node2D = $PlayerSpawnPos
-
+var player: Player
 
 func _ready() -> void:
 	_spawn_player()
+	$CanvasLayer3/Progressbarr/ProgressBar.player = player
+	$CanvasLayer3/Progressbarr/ProgressBar.start_y = $PlayerSpawnPos.global_position.y
 
 
 
@@ -21,6 +23,7 @@ func _spawn_player() -> void:
 	if p.has_signal("DEAD"):
 		p.connect("DEAD", _on_player_dead)
 	add_child(p)
+	player = p
 	
 
 func respawn_player():

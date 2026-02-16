@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://31wb5oudou50"]
+
+[ext_resource type="Script" uid="uid://q2pquj5udlk4" path="res://progress_bar.gd" id="1_0xgol"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 1, 1)
+self_modulate = Color(0, 0.911098, 0.949972, 1)
+offset_left = 46.0
+offset_top = 139.0
+offset_right = 305.0
+offset_bottom = 158.0
+rotation = 1.5708
+tooltip_text = "
+"
+theme_override_font_sizes/font_size = 20
+max_value = 38440.0
+fill_mode = 1
+show_percentage = false
+script = ExtResource("1_0xgol")
+player_path = NodePath(".")
+label_path = NodePath("../MeterLabel")
+
+[node name="MeterLabel" type="Label" parent="."]
+offset_left = 22.0
+offset_top = 392.0
+offset_right = 51.0
+offset_bottom = 415.0
+text = "0 m"
+horizontal_alignment = 1

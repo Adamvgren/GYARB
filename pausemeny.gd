@@ -22,7 +22,7 @@ func _on_resume_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().change_scene_to_file("res://control.tscn")
+	get_tree().change_scene_to_file("res://StartMeny.tscn")
 
 
 func _process(delta):
