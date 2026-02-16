@@ -6,6 +6,12 @@ const PLAYER_SCENE = preload("res://Scenes/Player.tscn")
 @onready var respawn_point: Node2D = $PlayerSpawnPos
 var player: Player
 
+@export var space_y: float = -29760
+@export var goal_y: float = -38485.0
+var finished = false
+var space_grav_on = false
+var orginal_grav: float = 0.0
+
 func _ready() -> void:
 	_spawn_player()
 	$CanvasLayer3/Progressbarr/ProgressBar.player = player
@@ -14,8 +20,28 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	pass
-
+	if finished:
+		return
+	var Player = get_tree().get_first_node_in_group("Player") as Node
+	
+	if Player == null:
+		return
+		
+	if Player.global_position.y <= goal_y:
+		finished = true
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://EndScreen.tscn")
+		
+	if orginal_grav == 0.0:
+		orginal_grav = Player.GRAVITY
+	
+	if not space_grav_on and Player.global_position.y <= space_y:
+		space_grav_on = true
+		Player.GRAVITY = orginal_grav * 0.5
+	
+	elif space_grav_on and Player.global_position.y > space_y:
+		space_grav_on = false
+		Player.GRAVITY = orginal_grav
 func _spawn_player() -> void:
 	var p = PLAYER_SCENE.instantiate()
 	p.global_position = respawn_point.global_position
