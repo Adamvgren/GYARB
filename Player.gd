@@ -7,7 +7,7 @@ signal dead
 @onready var ACC = 1250
 @onready var respawn_marker = get_node("/root/Map/PlayerSpawnPos")
 
-@export var JUMP_VELOCITY = -650
+@export var JUMP_VELOCITY = -500
 
 @export var KNOCKBACK_SPEED: float = 300.0
 
