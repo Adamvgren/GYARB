@@ -7,7 +7,7 @@ signal dead
 @onready var ACC = 1250
 @onready var respawn_marker = get_node("/root/Map/PlayerSpawnPos")
 
-@export var JUMP_VELOCITY = -500
+@export var JUMP_VELOCITY = -650
 
 @export var KNOCKBACK_SPEED: float = 300.0
 
@@ -61,6 +61,7 @@ func _physics_process(delta: float) -> void:
 	# Hoppa
 	if Input.is_action_just_pressed("Jump") and is_on_floor(): 
 		velocity.y = JUMP_VELOCITY
+		$JumpSFX.play()
 
 	
 
@@ -128,6 +129,7 @@ func _enter_air_state(jumping: bool):
 
 	if jumping:
 		velocity.y = JUMP_VELOCITY
+		$JumpSFX.play()
 
 
 func enter_dead_state(knockback_dir: Vector2 = Vector2.ZERO):

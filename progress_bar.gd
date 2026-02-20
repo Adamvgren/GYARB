@@ -1,9 +1,9 @@
 extends ProgressBar
 
 @export var player_path: NodePath
-@export var level_height_pixels: float = 38440
+@export var level_height_pixels: float = 20000
 @export var label_path: NodePath
-@export var pixels_per_meter: float = 10.0
+@export var pixels_per_meter: float = 5.2
 
 var player: Player
 var start_y: float
@@ -13,7 +13,7 @@ var best_y: float = 0
 func _ready() -> void:
 	label = get_node_or_null(label_path) as Label
 	min_value = 0
-	max_value = 3844.0
+	max_value = 3844
 	value = 0
 	
 

@@ -2,17 +2,23 @@ extends Node2D
 
 const PLAYER_SCENE = preload("res://Scenes/Player.tscn")
 
-
+@onready var map_music: AudioStreamPlayer2D = $MapMusic
 @onready var respawn_point: Node2D = $PlayerSpawnPos
-var player: Player
+@onready var space_music: AudioStreamPlayer2D = $SpaceMusic
 
-@export var space_y: float = -29760
-@export var goal_y: float = -38485.0
+
+@export var space_y: float = -14972.5
+@export var goal_y: float = -20000.0
+
+
+var in_space = false
+var player: Player
 var finished = false
 var space_grav_on = false
 var orginal_grav: float = 0.0
 
 func _ready() -> void:
+	map_music.play()
 	_spawn_player()
 	$CanvasLayer3/Progressbarr/ProgressBar.player = player
 	$CanvasLayer3/Progressbarr/ProgressBar.start_y = $PlayerSpawnPos.global_position.y
@@ -33,13 +39,24 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://EndScreen.tscn")
 		
 	if orginal_grav == 0.0:
-		orginal_grav = Player.GRAVITY
+		orginal_grav = player.GRAVITY
 	
-	if not space_grav_on and Player.global_position.y <= space_y:
+	elif not space_grav_on and player.global_position.y <= space_y:
 		space_grav_on = true
 		Player.GRAVITY = orginal_grav * 0.5
 	
-	elif space_grav_on and Player.global_position.y > space_y:
+	if not in_space and player.global_position.y <= space_y:
+		in_space = true
+		map_music.stop()
+		get_tree().paused = false
+		space_music.play()
+		
+	elif in_space and player.global_position.y > space_y:
+		in_space = false
+		space_music.stop()
+		map_music.play()
+		
+	elif space_grav_on and player.global_position.y > space_y:
 		space_grav_on = false
 		Player.GRAVITY = orginal_grav
 func _spawn_player() -> void:
