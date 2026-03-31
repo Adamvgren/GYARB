@@ -13,12 +13,14 @@ config_version=5
 config/name="Gymnasiearbete HT-25/VT-26"
 run/main_scene="uid://bc4jmktp4sbew"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
 
 [display]
 
 window/size/viewport_width=800
 window/size/viewport_height=520
+window/size/mode=4
+window/size/borderless=true
 window/size/window_width_override=1600
 window/size/window_height_override=1040
 window/stretch/mode="viewport"

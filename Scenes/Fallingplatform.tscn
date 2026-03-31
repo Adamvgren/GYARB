@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dbchcj8wvliui"]
 
-[ext_resource type="Texture2D" uid="uid://byv8aqmcxmd3t" path="res://Trap and Weapon/FallingPlatfrom.png" id="1_j250o"]
-[ext_resource type="Script" uid="uid://b1viiq4et2vkl" path="res://Scenes/fallingplatformarea2D.gd" id="2_a1oqy"]
+[ext_resource type="Texture2D" uid="uid://byv8aqmcxmd3t" path="res://Assets/Trap and Weapon/FallingPlatfrom.png" id="1_j250o"]
+[ext_resource type="Script" uid="uid://b1viiq4et2vkl" path="res://Scripts/fallingplatformarea2D.gd" id="2_a1oqy"]
 
 [sub_resource type="GDScript" id="GDScript_j250o"]
 script/source = "extends CharacterBody2D
