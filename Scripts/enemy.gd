@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var ray_left: RayCast2D = $Leftray
-@onready var ray_right: RayCast2D = $Rightray
+@onready var ray_left: RayCast2D = $Leftray # Kollar mark vänster
+@onready var ray_right: RayCast2D = $Rightray # Kollar mark höger
 @onready var turn_cooldown_timer: Timer = $TurnCooldownTimer
  
 var SPEED: float = 70
 var GRAVITY: float = 1200
 
-enum { IDLE, PATROL,SPAWN }
+enum { IDLE, PATROL,SPAWN } 
 var state = SPAWN
 var can_turn: bool = true
 
@@ -16,11 +16,12 @@ var direction = -1
 
 func _ready() -> void:
 	anim.animation_finished.connect(_on_animation_finished)
+	# När animation är klar → kör funktion
 	if anim.sprite_frames.has_animation("SPAWN"):
 		anim.sprite_frames.set_animation_loop("SPAWN", false)
 
 func _physics_process(delta):
-	velocity.y += GRAVITY * delta
+	velocity.y += GRAVITY * delta # Gravitationen
 
 	match state:
 		SPAWN:
@@ -35,20 +36,21 @@ func _physics_process(delta):
 
 func _idle_state():
 	anim.play("IDLE")
-	velocity.x = 0
+	velocity.x = 0 # Står still
 
 func _patrol_state():
-	if anim.animation != "WALK":
+	if anim.animation != "WALK": # Om anim inte är walk spela walk
 		anim.play("WALK")
 
 	velocity.x = SPEED * direction
-	anim.flip_h = direction < 0
+	anim.flip_h = direction < 0 # Vänder spriten
 
 	if can_turn:
 		if direction == -1 and not ray_left.is_colliding():
 			_turn_around()
 		elif direction == 1 and not ray_right.is_colliding():
 			_turn_around()
+		# Vänder om någon av raycastsen inte känner av mark
 	
 func _spawn_state():
 	velocity.x = 0
@@ -56,7 +58,7 @@ func _spawn_state():
 	
 
 func _turn_around():
-	direction *= -1
+	direction *= -1 # Byter håll
 
 
 func _on_turn_cooldown_timer_timeout() -> void:
@@ -66,6 +68,7 @@ func _on_player_detect_area_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		var direction_to_player = global_position.direction_to(body.global_position)
 		body.enter_dead_state(direction_to_player)
+		# Dödar spelaren när den känns av i enemys area/collision
 		
 	
 
@@ -76,6 +79,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 func _on_animation_finished():
 	if state == SPAWN and anim.animation == "SPAWN":
-		state = PATROL
+		state = PATROL  # Om spawn animation är aktiv byt state till patrol
 
 	

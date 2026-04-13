@@ -2,28 +2,29 @@ extends Control
 
 
 func resume():
-	get_tree().paused = false
-	$AnimationPlayer.play_backwards("Blur")
+	get_tree().paused = false # Startar spelet igen
+	$AnimationPlayer.play_backwards("Blur") # Tar bort blur-effekten 
+	
 func paus():
-	get_tree().paused = false
-	$AnimationPlayer.play("Blur")
+	get_tree().paused = false 	# Pausar spelet
+	$AnimationPlayer.play("Blur") 	# Lägger på blur-effekt
 
 func testESC():
 	if Input.is_action_just_pressed("Escape") and get_tree().paused == false:
-		paus()
+		paus() # Pausa om spelet körs
 	elif Input.is_action_just_pressed("Escape") and get_tree().paused == true:
-		resume()
+		resume() # Återuppta om pausat
 
 
 func _on_resume_pressed() -> void:
-	resume()
+	resume() # Knapp för att fortsätta
 
 
 
 
 func _on_quit_pressed() -> void:
-	get_tree().change_scene_to_file("res://StartMeny.tscn")
+	get_tree().change_scene_to_file("res://StartMeny.tscn") # Går till startmenyn
 
 
 func _process(delta):
-	testESC()
+	testESC() # Kollar ESC varje frame

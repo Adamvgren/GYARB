@@ -12,8 +12,8 @@ func _process(delta: float) -> void:
 
 
 func _on_Start_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/map.tscn")
+	get_tree().change_scene_to_file("res://Scenes/map.tscn") # Byter scen till spelets nivå
 
 
 func _on_Exit_pressed() -> void:
-	get_tree().quit()
+	get_tree().quit() # Stänger spelet

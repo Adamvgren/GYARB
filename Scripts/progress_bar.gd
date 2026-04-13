@@ -6,7 +6,7 @@ extends ProgressBar
 @export var pixels_per_meter: float = 5.2
 
 var player: Player
-var start_y: float
+var start_y: float # Startpostion (för att mäta höjd)
 var best_y: float = 0 
 @onready var label: Label = $MeterLabel
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 	label = get_node_or_null(label_path) as Label
 	min_value = 0
 	max_value = 3844
-	value = 0
+	value = 0 # Startvärde
 	
 
 func _find_player() -> void:
@@ -29,13 +29,13 @@ func _find_player() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player == null:
-		return
+		return # Gör inget om spelaren inte finns
 	
 	
-	var climed_pixels = start_y - player.global_position.y
-	climed_pixels = clamp(climed_pixels, 0.0, level_height_pixels)
+	var climed_pixels = start_y - player.global_position.y # Hur långt spelaren har klättrat
+	climed_pixels = clamp(climed_pixels, 0.0, level_height_pixels) # stoppar värdet så att det inte går under 0 eller över MAX
 	
 	if label:
-		var meters = climed_pixels / pixels_per_meter
-		label.text =str(int(meters)) + "m"
-		value = meters
+		var meters = climed_pixels / pixels_per_meter # omvandlar pixlar till meter
+		label.text =str(int(meters)) + "m" # Visar meter
+		value = meters # Uppdaterar Progressbaren

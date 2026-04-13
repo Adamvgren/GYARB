@@ -1,11 +1,11 @@
 extends CharacterBody2D
 class_name Player
-signal dead
+signal dead # Signal när spelaren dör
 @onready var anim = $AnimatedSprite2D
 @onready var MAX_SPEED = 200
 @onready var GRAVITY = 1250
 @onready var ACC = 1250
-@onready var respawn_marker = get_node("/root/Map/PlayerSpawnPos")
+@onready var respawn_marker = get_node("/root/Map/PlayerSpawnPos") # Var spelaren spawnar
 
 @export var JUMP_VELOCITY = -500
 
@@ -16,7 +16,7 @@ signal dead
 
 
 
-enum{IDLE, WALK, AIR, DEAD}
+enum{IDLE, WALK, AIR, DEAD} # States
 var state = IDLE
 var want_to_jump: bool = false
 var jump_buffer: float = 0.0
@@ -28,9 +28,9 @@ func _ready() -> void:
 	if anim.sprite_frames.has_animation("DEAD"):
 		anim.sprite_frames.set_animation_loop("DEAD", false)
 
-func _movement(delta: float, input_x: float) -> void:
+func _movement(delta: float, input_x: float) -> void: # Movement kontrollerar max speed och acc
 	if input_x != 0:
-		velocity.x = move_toward(velocity.x, input_x * MAX_SPEED, ACC * delta)
+		velocity.x = move_toward(velocity.x, input_x * MAX_SPEED, ACC * delta) # Mjuk acceleration mot maxhastighet beroende på input 
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACC * delta)
 
@@ -38,7 +38,7 @@ func _movement(delta: float, input_x: float) -> void:
 	
 
 
-func _update_direction(input_x: float) -> void:
+func _update_direction(input_x: float) -> void: # Vänder på spriten åt höger eller vänster beroende på input
 	if input_x > 0:
 		anim.flip_h = false
 	elif input_x < 0:
@@ -50,7 +50,8 @@ func _physics_process(delta: float) -> void:
 	if state == DEAD:
 		_DEAD_STATE(delta)
 		move_and_slide()
-		return
+		return  # Stoppar normal kontroll när död
+
 	
 
 	var input_x = Input.get_axis("ui_left", "ui_right")
@@ -64,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	# Hoppa
 	if Input.is_action_just_pressed("Jump") and is_on_floor(): 
 		velocity.y = JUMP_VELOCITY
-		$JumpSFX.play()
+		$JumpSFX.play() # Hoppljud
 
 	
 
@@ -114,7 +115,7 @@ func _AIR_STATE(input_x, delta):
 			_enter_walk_state()
 
 func _DEAD_STATE(delta):
-	_movement(delta, 0)
+	_movement(delta, 0) # ingen input när död
 
 
 #######ENTER_STATES###########
@@ -137,7 +138,7 @@ func _enter_air_state(jumping: bool):
 
 func enter_dead_state(knockback_dir: Vector2 = Vector2.ZERO):
 	if state == DEAD:
-		return #
+		return # Undviken dubbel död
 
 	state = DEAD
 	is_dead = true
@@ -145,19 +146,19 @@ func enter_dead_state(knockback_dir: Vector2 = Vector2.ZERO):
 
 	
 	if knockback_dir != Vector2.ZERO:
-		velocity = knockback_dir * KNOCKBACK_SPEED
+		velocity = knockback_dir * KNOCKBACK_SPEED # Knockback när man dör
 	
 
 func _on_animation_finished():
 	if state == DEAD and anim.animation == "DEAD":
-		_respawn()
+		_respawn() # Respawn efter animation
 
 func _respawn():
-	global_position = respawn_marker.global_position
+	global_position = respawn_marker.global_position # Flyttar till spawnpunkt
 	velocity = Vector2.ZERO
 	state = IDLE
 	is_dead = false
-	anim.play("IDLE")
+	anim.play("IDLE") # Återställer spelaren
 
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.disabled = false

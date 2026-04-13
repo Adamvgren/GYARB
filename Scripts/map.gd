@@ -7,8 +7,8 @@ const PLAYER_SCENE = preload("res://Scenes/Player.tscn")
 @onready var space_music: AudioStreamPlayer2D = $SpaceMusic
 
 
-@export var space_y: float = -14972.5
-@export var goal_y: float = -20000.0
+@export var space_y: float = -14972.5 # Rymden börjar
+@export var goal_y: float = -20000.0 # Mål höjden
 
 
 var in_space = false
@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if finished:
-		return
+		return # Stoppar allt om spelet är klart
 	var Player = get_tree().get_first_node_in_group("Player") as Node
 	
 	if Player == null:
@@ -37,19 +37,20 @@ func _process(delta: float) -> void:
 		finished = true
 		get_tree().paused = false
 		get_tree().change_scene_to_file("res://EndScreen.tscn")
+		# Går till slutskärm
 		
 	if orginal_grav == 0.0:
-		orginal_grav = player.GRAVITY
+		orginal_grav = player.GRAVITY # Sparar org graven
 	
 	elif not space_grav_on and player.global_position.y <= space_y:
 		space_grav_on = true
-		Player.GRAVITY = orginal_grav * 0.5
+		Player.GRAVITY = orginal_grav * 0.5 # Lägre grav i rymden
 	
 	if not in_space and player.global_position.y <= space_y:
 		in_space = true
 		map_music.stop()
 		get_tree().paused = false
-		space_music.play()
+		space_music.play() # Byter musik
 		
 	elif in_space and player.global_position.y > space_y:
 		in_space = false
@@ -58,13 +59,14 @@ func _process(delta: float) -> void:
 		
 	elif space_grav_on and player.global_position.y > space_y:
 		space_grav_on = false
-		Player.GRAVITY = orginal_grav
+		Player.GRAVITY = orginal_grav # Återställer graven
 func _spawn_player() -> void:
 	var p = PLAYER_SCENE.instantiate()
 	p.global_position = respawn_point.global_position
 	
 	if p.has_signal("DEAD"):
 		p.connect("DEAD", _on_player_dead)
+		# Lyssnar på när spelaren dör
 	add_child(p)
 	player = p
 	
@@ -72,8 +74,9 @@ func _spawn_player() -> void:
 func respawn_player():
 	var old_player = get_node_or_null("Player")
 	if old_player:
-		old_player.queue_free()
+		old_player.queue_free() # Tar bort den gamla spelaren
 	_spawn_player()
 
 func _on_player_dead() -> void:
-	respawn_player()
+	respawn_player() # Kör respawn när DEAD-signalen triggas från spelaren
+	
