@@ -15,7 +15,7 @@ func _on_Restart_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/map.tscn")
 	
 func _on_Main_Menu() -> void:
-	get_tree().change_scene_to_file("res://StartMeny.tscn")
+	get_tree().change_scene_to_file("res://Scenes/StartMeny.tscn")
 
 func _on_Exit_pressed() -> void:
 	get_tree().quit()

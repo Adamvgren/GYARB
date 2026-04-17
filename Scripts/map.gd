@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	if Player.global_position.y <= goal_y:
 		finished = true
 		get_tree().paused = false
-		get_tree().change_scene_to_file("res://EndScreen.tscn")
+		get_tree().change_scene_to_file("res://Scenes/EndScreen.tscn")
 		# Går till slutskärm
 		
 	if orginal_grav == 0.0:
