@@ -192,10 +192,10 @@ offset_top = 4.0
 offset_right = 9.0
 offset_bottom = 5.0
 
-[node name="Progressbar" type="CanvasLayer" parent="."]
+[node name="Progressbar1" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="Progressbarr" parent="Progressbar" instance=ExtResource("8_6q3n4")]
+[node name="Progressbarr" parent="Progressbar1" instance=ExtResource("8_6q3n4")]
 
 [node name="stars_moon" type="Node2D" parent="."]
 
@@ -348,7 +348,7 @@ shape = SubResource("RectangleShape2D_dlo4w")
 position = Vector2(618, -15254)
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(386, -15811)
+position = Vector2(386, -15810)
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource("4_w7jjh")]
 position = Vector2(127, -16096)
@@ -366,13 +366,13 @@ position = Vector2(377, -17780)
 position = Vector2(66, -18066)
 
 [node name="Enemy12" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(382, -18715)
+position = Vector2(382, -18717)
 
 [node name="Enemy13" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(88, -19010)
+position = Vector2(86, -19003)
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(77, -80)
+position = Vector2(77, -79)
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource("4_w7jjh")]
 position = Vector2(523, 190)
@@ -395,11 +395,11 @@ position = Vector2(371, -2145)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy16" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(389, -2700)
+position = Vector2(389, -2702)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy17" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(393, -3225)
+position = Vector2(392, -3226)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy18" parent="Enemies" instance=ExtResource("4_w7jjh")]
@@ -407,7 +407,7 @@ position = Vector2(372, -3782)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy19" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(355, -4480)
+position = Vector2(355, -4481)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy20" parent="Enemies" instance=ExtResource("4_w7jjh")]
@@ -415,39 +415,39 @@ position = Vector2(435, -5133)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy21" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(428, -5958)
+position = Vector2(428, -5959)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy22" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(408, -6497)
+position = Vector2(405, -6499)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy23" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(410, -7308)
+position = Vector2(410, -7309)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy24" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(426, -7864)
+position = Vector2(426, -7865)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy25" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(467, -8405)
+position = Vector2(467, -8406)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy26" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(393, -8834)
+position = Vector2(393, -8835)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy27" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(675, -9342)
+position = Vector2(675, -9343)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy28" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(464, -9755)
+position = Vector2(464, -9756)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy29" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(676, -10152)
+position = Vector2(676, -10153)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy30" parent="Enemies" instance=ExtResource("4_w7jjh")]
@@ -459,7 +459,7 @@ position = Vector2(482, -10868)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy32" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(320, -11217)
+position = Vector2(320, -11218)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy33" parent="Enemies" instance=ExtResource("4_w7jjh")]
@@ -467,15 +467,15 @@ position = Vector2(481, -11678)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy34" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(405, -12170)
+position = Vector2(405, -12171)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy35" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(116, -12680)
+position = Vector2(116, -12679)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy36" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(529, -13046)
+position = Vector2(530, -13045)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy37" parent="Enemies" instance=ExtResource("4_w7jjh")]
@@ -486,18 +486,10 @@ up_direction = Vector2(0, 1)
 position = Vector2(367, -13919)
 up_direction = Vector2(0, 1)
 
-[node name="Enemy39" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(367, -13919)
-up_direction = Vector2(0, 1)
-
 [node name="Enemy40" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(160, -14857)
+position = Vector2(160, -14856)
 up_direction = Vector2(0, 1)
 
 [node name="Enemy41" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(596, -14587)
-up_direction = Vector2(0, 1)
-
-[node name="Enemy42" parent="Enemies" instance=ExtResource("4_w7jjh")]
-position = Vector2(596, -14587)
+position = Vector2(595, -14586)
 up_direction = Vector2(0, 1)

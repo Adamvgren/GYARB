@@ -20,8 +20,8 @@ var orginal_grav: float = 0.0
 func _ready() -> void:
 	map_music.play()
 	_spawn_player()
-	$CanvasLayer3/Progressbarr/ProgressBar.player = player
-	$CanvasLayer3/Progressbarr/ProgressBar.start_y = $PlayerSpawnPos.global_position.y
+	$Progressbar1/Progressbarr/ProgressBar.player = player
+	$Progressbar1/Progressbarr/ProgressBar.start_y = $PlayerSpawnPos.global_position.y
 
 
 
