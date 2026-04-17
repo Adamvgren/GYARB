@@ -182,7 +182,7 @@ tile_map_data = PackedByteArray("AAAQAB4AAAADAAQAAAAaAB8AAAADAAQAAAAaAB4AAAADAAE
 tile_set = SubResource("TileSet_e0an3")
 
 [node name="PlayerSpawnPos" type="Marker2D" parent="."]
-position = Vector2(386, -14964)
+position = Vector2(386, 400)
 
 [node name="Pausemeny" type="CanvasLayer" parent="."]
 
